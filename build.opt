@@ -1,0 +1,14 @@
+defaultmode='WC'
+if(comp_mode='EMX') then libs.add='libiberty.lib'; else libs.add='libconv.lib libuls.lib';
+libs.add=libs.add' ..\pcre\pcre.lib'
+uses='rexx add'
+debugdef='-D__FED_DEBUG__=1'
+compilers.WC ='wcl386 -i=@include@ -zq -zm -6r -bm -ot -s'
+sourcetype='*.cpp'
+prerequisite='@cd pcre & call mk.cmd 'comp_mode' & cd ..'
+if (comp_mode='EMX') then include='..\include -I..\pcre'; else include='..\include;..\pcre'
+base_header='.\include\version.h'
+base_string_1='@#ES:'
+base_string_2='#@'
+base_string_3='Fast Editor Lite'
+

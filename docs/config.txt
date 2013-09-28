@@ -1,0 +1,908 @@
+/*
+** Module   :CONFIG.TXT
+** Abstract :
+**
+** Copyright (C) Sergey I. Yevtushenko
+** Log: Fri  20/03/1998     Created
+**      Mon  30/03/1998     Updated for v0.2.0d
+**      Sat  11/04/1998     Updated for v0.2.0i
+**      Tue  28/04/1998     Updated for v0.2.0l
+**      Sat  09/01/1999     Updated for v0.2.0p
+**      Sat  05/06/1999     Updated for v0.2.5
+**      Fri  31/03/2000     Updated for v0.2.8
+**      Fri  09/11/2001     Updated for v0.2.17
+**      Tue  19/02/2002     Updated for v0.2.20
+**      Mon  03/05/2004		Updated for v0.2.31 (not completed)
+*/
+                      Fast Editor Lite for OS/2
+
+                          Configuration guide
+
+                             Version v2.xx
+
+             Copyright (C) Sergey I. Yevtushenko, 1997-2004
+
+  FED Configuration.
+
+    FED is configured via simple ASCII file called FED.INI.
+    This file contains all configurable parameters and key bindings.
+
+    NOTE: Configurable parameters have default values, but key
+          bindings have not. This means that FED does not work
+          without INI file.
+
+    Sample FED.INI file is included into package.
+    You can use it as a base for your own configuration.
+    FED.INI should be placed in the same directory as FED.EXE.
+
+
+  Format of FED.INI
+
+    FED.INI is a simple ASCII file which consists of variable assignments,
+    comments, directives and empty strings. Comments and empty strings are
+    ignored.
+
+    At present FED recognizes only one directive:
+
+    @include <file>
+
+    Where <file> presented as a full or relative path to file
+    in single or double quotes. If full path is used then file
+    is searched at specified path. If relative path is specified then
+    file is seached in current directory (or subdirectory under
+    current directory). If file is not found there then it is
+    searched in directory relative to that one in which FED.EXE is
+    sored. For example:
+
+	    FED.INI
+    	    ...
+            @include "fedconfig\samples.ini"
+	        ...
+
+        Current directory: D:\Work
+
+        FED.EXE directory: C:\Tools\FED
+
+
+    Following paths will be used to locate include file:
+
+        D:\Work\fedconfig\samples.ini
+        C:\Tools\FED\fedconfig\samples.ini
+
+
+    Comment is a line started with ';','/' or '#' (without quotes).
+
+    Variable assignments are just pairs <variable>=<value>.
+    During processing of 'value' part back slash (\) is threated
+    as a escape character. This allows to insert into 'value'
+    special characters: '\n', '\r', '\t'. Other characters following
+    backslash are inserted as is. If you need to insert backslash
+    as is, it should be prepended by backslash, i.e. doubled:
+
+	    \\ -> \
+    	\\\\ -> \\
+
+    and so on. Text of REXX macro is left unchanged, i.e. no translation
+    of slashes is performed.
+
+    Each configurable parameter have preferred name. Type of values which may
+    be assigned to variable depends on variable. Some of them are numbers,
+    some - strings.
+
+    Numeric values may be decimal or hexadecimal.
+    Hexadecimal values should be preceded by 0x, exactly as in C/C++.
+
+    String value consists of one or more "segments".
+    Each segment is quoted string.
+
+    String values should be in single or double quotes.
+    Quotes can't be escaped, so if you need to insert single quote, you
+    should use it in double quotes quoted string, and if you need double
+    quote, you should use it in single quotes quoted string.
+    If you need to continue string on the next line, close quote, add ','
+    at the end of line and open quote on the next line.
+    These rules are very similar to those in REXX language but
+    not completely equal.
+
+    All configurable parameters and variable types are listed below
+    (short descriptions follow this list):
+
+    color.app.default             - number
+    color.app.status              - number
+    color.dialog.default          - number
+    color.dialog.hilite           - number
+    color.edit.comment            - number
+    color.edit.const              - number
+    color.edit.default            - number
+    color.edit.eof                - number
+    color.edit.function           - number
+    color.edit.ident              - number
+    color.edit.number             - number
+    color.edit.preproc            - number
+    color.edit.selection          - number
+    color.edit.semicol            - number
+    color.edit.stdword            - number
+    color.edit.xnumber            - number
+    color.line.active.comment     - number
+    color.line.active.const       - number
+    color.line.active.default     - number
+    color.line.active.eof         - number
+    color.line.active.function    - number
+    color.line.active.ident       - number
+    color.line.active.number      - number
+    color.line.active.preproc     - number
+    color.line.active.selection   - number
+    color.line.active.semicol     - number
+    color.line.active.stdword     - number
+    color.line.active.xnumber     - number
+    color.line.inactive.comment   - number
+    color.line.inactive.const     - number
+    color.line.inactive.default   - number
+    color.line.inactive.eof       - number
+    color.line.inactive.function  - number
+    color.line.inactive.ident     - number
+    color.line.inactive.number    - number
+    color.line.inactive.preproc   - number
+    color.line.inactive.selection - number
+    color.line.inactive.semicol   - number
+    color.line.inactive.stdword   - number
+    color.line.inactive.xnumber   - number
+    color.list.active.current     - number
+    color.list.active.currsel     - number
+    color.list.active.default     - number
+    color.list.active.selection   - number
+    color.list.inactive.current   - number
+    color.list.inactive.currsel   - number
+    color.list.inactive.default   - number
+    color.list.inactive.selection - number
+    color.menu.active.current     - number
+    color.menu.active.currsel     - number
+    color.menu.active.default     - number
+    color.menu.active.selection   - number
+    color.static.default          - number
+    color.static.hilite           - number
+
+    cursor.shape.insert           - number
+    cursor.shape.overwrite        - number
+
+    editor.default.format         - number
+    editor.force.pm               - number - obsolete
+    editor.helptext               - string
+    editor.hiliting               - string
+    editor.statusline             - string
+    editor.tabwidth               - number
+    editor.untitled               - string
+    editor.ctrlbreak.action       - number
+    editor.no.ea                  - number
+    editor.statuspos              - number
+    editor.verbose.search         - number
+    editor.default.wordwrap.state - number
+    editor.default.wordwrap.margin- number
+    mouse.event.mask              - number
+    mouse.sense.shift             - number
+    editor.indent.bracket         - number
+    editor.autounindent           - number
+    editor.unindent.keywords      - number
+    editor.unindent.brackets      - number
+    editor.flash.bracket          - number
+    editor.word.delimiter         - string
+    editor.word.delete_ws         - number
+    editor.draw.eol               - number
+    editor.draw.eol               - number
+    editor.unindent.spaces.only   - number
+
+Short description of variables
+
+  Variables "color.*" contain decimal or hexadecimal color values of
+    different parts of editor. Colors are usual text mode character attributes,
+    where high order nibble (high order 4 bits of byte) is responsible for
+    background color, and lower order nibble - for foreground (character) color.
+    Note, that input line in dialog is exactly the same object as full editor
+    window, but with highlighting turned off. This causes full list of colors
+    for input line to appear in list, but only part of them are really used
+    (.default and .selection).
+
+  Variable "editor.tabwidth" is responsible for tab character representation
+    in space characters number.
+
+  Variable "editor.hiliting" contains string which is responsible for how the
+    editor will try to guess highlighting for opened file.
+    This string have the following format:
+
+        "MODE_NAME_1:*.mask1;*.mask2;...\n",
+        "MODE_NAME_2:*.mask3;*.mask4;...\n".
+
+    Note trailing '\n' sequence, it is used for delimiting highlighting mode
+    strings.
+
+  Variable "editor.untitled" contains default name for '.Untitled' or newly
+    created files.
+
+  Variables "cursor.shape.insert" and "cursor.shape.overwrite" contains
+    numbers which are responsible for cursor shape. This number means relative
+    (in percents of full cursor height) position from which shape starts. In
+    other words  0 - means baseline, 100 - means full character size.
+
+  Variable "editor.statusline" represents format in which editor will
+    display status information. This string can contain following format rules:
+
+    %n -  file number 0-9
+    %r -+ row
+    %c -+ col
+    %d -+ current char (decimal)
+    %x -  current char (hexadecimal)
+    %h -  highlighting mode
+    %a -  autoindent flag ('I'|' ')
+    %u -  update flag ('*'|' ')
+    %f -+ filename
+    %t -  file type: Unix ('\0x0a' delimited)/DOS ('\x0d\x0a' delimited)
+    %l -  placeholder for current codepage (LANG) setting
+    %p -+ relative position in file
+    %w -  word wrap status (' '|'W'|'M')
+
+    For formats marked with '+' between % and format can be placed optional
+    digit. This digit means minimal length of representation. Unused positions
+    will be filled with zeroes. Other characters will be shown in the status
+    line as is.
+    By default this string has following contents :
+        "L%3r:C%2c %h [%u%f]".
+
+    This means:
+        character L,
+        followed by 3-digits number of row,
+        semicolon,
+        character C,
+        followed by 2-digits column number,
+        space,
+        highlighting mode name,
+        character '[',
+        update flag,
+        current file name,
+        character ']'.
+    Example of status line with default format line:
+    'L001:C01 REXX [*C:\startup.cmd]'
+
+    Default FED.INI specifies another format line:
+        "(%p%%) L%4r:C%2c CHR(%xh,%3dd) [%h:%a:%u:%t:%30f] %l"
+
+    Example status line for it (right now when I'm editing this file):
+    '(42%) L0270:C05 CHR(20h,032d) [none:I:*:D:C:\Work\FOpS\config.txt°°°°°°°]'
+
+
+  Variable "editor.helptext" contains text which will be shown for command
+    'HelpScreen' (see below description of this command). Text should be
+    formatted on 'per line' basis, and each line should be followed by '\n'
+    sequence.
+
+  Variable "editor.force.pm" - obsolete.
+
+  Variable "editor.default.format" - set default format (Unix/DOS) for new
+    files. Default (unassigned) value is 0, which means DOS file format.
+    Any value other than 0 sets Unix file format.
+
+  Variable "editor.ctrlbreak.action" defines what editor will do
+    on the Ctrl+Break key press:
+
+    0 - die with message box (default)
+    1 - die without messages, all changes are lost
+    2 - die with saving all changes
+    3 - ignore Ctrl-Break
+
+  Variable "editor.no.ea" disables writing EA's. If EA is present
+    then it still used but not updated.
+
+  Variable "editor.statuspos" if it is >0 tells FED to place
+    status line at the top of screen.
+
+  Variable "editor.verbose.search" to produce more messages during search.
+
+  Variable "mouse.event.mask" defines a mask for mouse events which will
+    be used to move cursor. Following events are recognized:
+        MOTION                 0x01
+        MOTION_WITH_BN1_DOWN   0x02
+        BN1_DOWN               0x04
+        MOTION_WITH_BN2_DOWN   0x08
+        BN2_DOWN               0x10
+        MOTION_WITH_BN3_DOWN   0x20
+        BN3_DOWN               0x40
+
+    Default value is 0x06, which is equal to MOTION_WITH_BN1_DOWN | BN1_DOWN.
+    Setting variable to 0 disables processing of mouse events.
+    Be careful with MOTION flag: enabling it will cause cursor movement
+    on all mouse moves.
+
+  Variable "mouse.sense.shift" makes moving cursor with mouse sesitive to
+    Shift keys. If variable is not zero then moving cursor with mouse
+    will unmark previously maked block if Shift key is not pressed and
+    will mark block if Shift key is pressed.
+
+  Variable "editor.default.wordwrap.state" determines default state
+    of the word wrap feature and default state of the merge feature.
+    Merge state determines if editor will merge remaider of the string which
+    exceeds specified limit with next text in next line.
+    Default state is used when file is opened or created new. Following
+    values are recognized:
+
+        Value Wrap     Merge
+    	0     off       off
+    	1     on        off
+    	2     off       on
+        3     on        on
+
+    Default value of this variable is 2, so merge is on and word wrap is off.
+
+  Variable "editor.default.wordwrap.margin" determines right margin of the
+    text for word wrap. By default this value is set to 78.
+
+  Variable "editor.indent.bracket"
+  Variable "editor.autounindent" controls automated unindenting after
+    pressing <Enter> in the string which follows some keywords. For example
+    typing following sequence in C/C++/Java will not require involvement of
+    <Tab> or cursor movement keys:
+
+    if(foo == 1)
+        i = 2;
+    else
+        j = 5;
+    _
+
+  Variable "editor.unindent.keywords" controls unindenting of
+    keywords. Unindenting of keywords allows to place some keywords (such as
+    'END' in REXX and PASCAL) on the previous tabstop.
+
+  Variable "editor.unindent.brackets" controls unindent of the brackets:
+    0 - disable unindent brackets
+    1 - enable unindent for closing ( '}' ) curly bracket
+    2 - enable unindent for both brackets (default)
+
+  Variable "editor.flash.bracket" controls "flashing" of matching bracket
+    when cursor points to bracket.
+
+  Variable editor.word.delimiter contains string with characters which
+    should be used as word delimiters.
+
+  Variable editor.word.delete_ws controls behavior of DelWordLeft and
+    DelWordRight commands.
+
+  Variable editor.draw.eol enables or disables EOL displaying.
+
+  Variable editor.unindent.spaces.only determines how editor will perform
+    unindent operation. If this variable is set to 0, then old behavior
+    is preserved (unindent by removing leftmost column in the block).
+    Any other value will cause editor to unindent by removing only
+    whitespace character in leftmost column of the block.
+
+Key bindings
+
+    Each key binding is a pair <key> = <action>
+    Key name starts with 'kb' followed by zero or more
+    special prefixes (Alt, Ctrl, Shift), followed by key name.
+    Order of special prefixes: Alt, Ctrl, Shift
+    This means that if you want to bind combination of keys Shift, Ctrl and
+    key F10, pressed simultaneously, you should name this key kbCtrlShiftF10.
+    Case of characters used in key name is ignored.
+
+    All key names are listed below:
+
+    kb0, kb1, kb2, kb3, kb4, kb5, kb6, kb7, kb8, kb9
+    kbA, kbB, kbBackSlash, kbBksp, kbC, kbCenter, kbComma,
+    kbD, kbDel, kbDiv, kbDown, kbE, kbEnd, kbEnter, kbEqual,
+    kbEsc, kbF, kbF1, kbF10, kbF11, kbF12, kbF2, kbF3, kbF4, kbF5,
+    kbF6, kbF7, kbF8, kbF9, kbG, kbGrDiv, kbGrEnter, kbGrMinus,
+    kbGrMul, kbGrPlus, kbH, kbHome, kbI, kbIns, kbJ, kbK, kbL,
+    kbLbracket, kbLeft, kbM, kbMinus, kbN, kbO, kbP, kbPgDown, kbPgUp,
+    kbPoint, kbQ, kbQuote, kbR, kbRbracket, kbRight, kbS, kbSemicolon,
+    kbSpace, kbT, kbTab, kbTilde, kbU, kbUp, kbV, kbW, kbX, kbY, kbZ
+
+    Actions are sequences of quoted blocks of text and function names
+    Quoted text can contain escape sequences '\t' (insert TAB character)
+    and '\n' (emulates Enter key pressing).
+    For quoting may be used either single (') or double (") quotes,
+    but each block should be quoted with one type of them.
+    Case of key names and actions is ignored
+
+    Actions may be continued in the next line by adding ',' at the end of line.
+  NOTE! key actions should not contain comments and continuation character (,)
+    and should not be inside quotes.
+
+    Full list of available functions with short descriptions:
+
+    Abort            - abort editor without saving changes
+    Bind             - interpret current file as a FED configuration file
+    Bksp             - delete previous character
+    Close            - close current file
+    Copy             - copy marked block into clipboard
+    Copyright        - invoke copyright message
+    Cut              - cut marked block and move it into clipboard
+    Del              - delete current character or clear marked block
+    DelLine          - delete current line
+    DelToEOL         - delete from current position to the end of line
+    DelWordLeft      - delete word left from cursor
+    DelWordRight     - delete word right from cursor
+    Down             - move cursor one line down
+    DownMark         - move cursor one line down and extend marked block
+    DupLine          - duplicate current line
+    End              - move cursor to end of line
+    EndMark          - move cursor to end of line and extend marked block
+    Exit             - exit with acknowledgement for saving files
+    FileBegin        - move cursor to the beginning of file
+    FileBeginMark    - move cursor to the beginning of file and extend marked block
+    FileEnd          - move cursor to the end of file
+    FileEndMark      - move cursor to the end of file and extend marked block
+    FileList         - invoke list of opened files
+    FlipAutoIndent   - toggle autoindent on/off
+    FlipBlockMode    - switch between rectangular/stream block
+    FlipHiliting     - switch highlighting between C++/REXX/MAKE/ASM/HTML/none
+    FlipType         - switch file type between UNIX/DOS formats
+    FlipWordWrap     - toggle state of word wrapping
+    FlipWordWrapMerge- toggle state of merge flag
+    HelpScreen       - invoke dialog with help text
+    HiliteSelect     - select hiliting mode from menu
+    Home             - move cursor to the beginning of line
+    HomeMark         - move cursor to the beginning of line and extend marked block
+    Indent           - indent block or line by one character right
+    Ins              - toggle insert/overwrite mode
+    InsDate          - insert current date at current cursor position
+    InsFileName      - insert current file name at current cursor position
+    InsFileNameShort - insert current file name with path name stripped
+    JumpCol          - invoke dialog and move cursor to the column entered in dialog
+    JumpLine         - invoke dialog and move cursor to the line entered in dialog
+    Left             - move cursor one character left
+    LeftMark         - move cursor one character left and extend marked block
+    Load             - invoke 'Open File' dialog
+    Lower            - convert current character/marked block to lower case
+    MacroRecEnd      - end recording and invoke 'Assign key' dialog
+    MacroRecStart    - start recording of keyboard macro
+    MarkGo0-9        - go to the position saved as bookmark 0-9
+    MarkSet0-9       - set bookmark 0-9
+    MatchBracket     - find matching bracket
+    MatchBracketMark - find matching bracket and extend marked block
+    New              - open new window with '.Untitled' file
+    NextFile         - switch to the next opened file
+    OpenJumpList0-9  - Show jump list 0-9
+    Paste            - paste block from clipboard
+    PgDn             - move cursor one page down
+    PgDnmark         - move cursor one page down and extend marked block
+    PgUp             - move cursor one page up
+    PgUpMark         - move cursor one page up and extend marked block
+    PrevFile         - switch to the previous opened file
+    Right            - move cursor one character right
+    RightMark        - move cursor one character right and extend marked block
+    Save             - save current file, invoke 'Save As' dialog for '.Untitled'
+    SaveAll          - save all opened files
+    SaveAs           - invoke 'Save As' dialog
+    Search           - invoke 'Search' dialog
+    SearchAgain      - repeat last search operation
+    SetCP            - change current Code Page
+    Sort             - sort lines using rectangular block as a set of keys
+    Undo             - undo action
+    UnIndent         - unindent block one character left
+    Up               - move cursor one line up
+    UpMark           - move cursor one line up and extend marked block
+    Upper            - convert current char/marked block to upper case
+    WordLeft         - move cursor one word left
+    WordLeftMark     - move cursor one word left and extend marked block
+    WordRight        - move cursor one word right
+    WordRightMark    - move cursor one word right and extend marked block
+
+Some notes about REXX API interface.
+
+    FED REXX API is still under construction. There are some known bugs
+    (especially with loading REXX code with curly brackets inside '{}'),
+    but this API became more or less useful and short (very short) explanation
+    below tries to fill some gaps in information about this interface.
+
+    List of REXX API's exported by FED consists of two parts. First path
+    is just the same functions as key macro functions described above.
+    All of these functions have no parameters.
+
+    fedAbort				fedBind
+    fedBksp				    fedClose
+    fedCopy				    fedCopyright
+    fedCut					fedDel
+    fedDelLine				fedDelToEOL
+    fedDelWordLeft			fedDelWordRight
+    fedDown				    fedDownMark
+    fedDupLine				fedEnd
+    fedEndMark				fedExit
+    fedFileBegin			fedFileBeginMark
+    fedFileEnd				fedFileEndMark
+    fedFileList			    fedFileStat
+    fedFlipAutoIndent		fedFlipBlockMode
+    fedFlipCompletion		fedFlipHiliting
+    fedFlipType			    fedFlipWordWrap
+    fedFlipWordWrapMerge	fedFlipWordWrapPara
+    fedHelpScreen			fedHiliteSelect
+    fedHome				    fedHomeMark
+    fedIndent				fedIns
+    fedInsDate				fedInsFilename
+    fedInsFileNameShort	    fedJumpCol
+    fedJumpLine			    fedLastFile
+    fedLeft				    fedLeftMark
+    fedLoad				    fedLower
+    fedMacroRecEnd			fedMacroRecStart
+    fedMarkGo0				fedMarkGo1
+    fedMarkGo2				fedMarkGo3
+    fedMarkGo4				fedMarkGo5
+    fedMarkGo6				fedMarkGo7
+    fedMarkGo8				fedMarkGo9
+
+    fedMarkSet0             fedMarkSet1
+    fedMarkSet2             fedMarkSet3
+    fedMarkSet4             fedMarkSet5
+    fedMarkSet6             fedMarkSet7
+    fedMarkSet8             fedMarkSet9
+    fedMarkWord             fedMatchBracket
+    fedMatchBracketMark     fedNew
+    fedNextCompletion       fedNextFile
+    fedOpenJumplist0        fedOpenJumplist1
+    fedOpenJumplist2        fedOpenJumplist3
+    fedOpenJumplist4        fedOpenJumplist5
+    fedOpenJumplist6        fedOpenJumplist7
+    fedOpenJumplist8        fedOpenJumplist9
+    fedPaste                fedPgDn
+    fedPgDnMark             fedPgUp
+    fedPgUpMark             fedPrevFile
+    fedRight                fedRightMark
+    fedSave                 fedSaveAll
+    fedSaveAs               fedSearch
+    fedSearchAgain          fedSelectCompletion
+    fedSetCP                fedShowStartupScreen
+    fedSort                 fedTouchAll
+    fedUndo                 fedUnindent
+    fedUp                   fedUpmark
+    fedUpper                fedWordLeft
+    fedWordLeftMark         fedWordRight
+    fedWordRightMark
+
+    Second group is more functional and does not have counterparts in macro
+    function list.
+
+    fedFillJumpList       - Fill JumpList with information
+    fedMsgBox             - Open simple message box and wait for key press.
+    fedOpenJumpList       - Show filled JumpList
+    fedOpenFile           - Open file or switch to it if already open
+    fedInsChar            - Insert sequence of characters
+    fedGetChar            - Get current char/line/substring
+    fedFind               - Find string in the current file
+    fedInput              - Invoke prompt and get user input
+    fedGetClip            - Get clipboard content
+    fedSetClip            - Set clipboard content
+    fedExec               - Excute external application
+    fedRxMatch            - Regular expression match/parse
+
+    REXX pool variable interface.
+
+    REXX Pool is a feature that allows REXX scripts save and restore
+    variables between calls. Also, almost all FED configuration variables,
+	settings and state variables are accessible via this interface.
+	Most of these variables are available for reading and writing,
+	but some are available for reading only.
+
+    fedVarSet             - store variable
+    fedVarGet             - get variable value
+    fedVarDrop            - drop variable
+
+Detailed description.
+
+rc = fedFillJumpList(stem, jumplist)
+
+    stem - name of variable filled as follows:
+            stem.jump_len       number of items in stem
+            stem.XX.jump_header what to show in list box
+            stem.XX.jump_file   file name
+            stem.XX.jump_row    row to jump (0 - do not change position)
+            stem.XX.jump_col    col to jump (0 - do not change position)
+
+            Where XX is a number from 0 up to stem.jump_len-1.
+
+            NOTE: all variables should be filled, even if they are not used.
+                  For example: if there is no column to jump in list item 5,
+                  variable stem.5.jump_col should be set to 0.
+
+    jumplist - number of jump list to use. Range: 0-9
+
+    rc - success, negative value - error.
+
+
+rc = fedMsgBox(message)
+
+    message - text of message to show.
+
+    rc - success, negative value - error.
+
+
+rc = fedOpenJumpList(jumplist)
+
+    jumplist - number of jump list to use. Range: 0-9
+
+    rc - success, negative value - error.
+
+
+rc = fedOpenFile(filename)
+
+    filename - file name to open or switch to.
+
+    rc - success, negative value - error.
+
+
+rc = fedInsChar(string)
+
+    string - text to insert.
+             Text will be inserted from current cursor position.
+
+    rc - success, negative value - error.
+
+
+rc = fedGetChar(row, [col], [len])
+
+    row - line number in current file to get text
+    col - start column for text to get
+    len - length of substring to return
+
+    rc - success, negative value - error.
+
+    If len parameter is omitted, rest of string is returned.
+    If col is omitted, full line is returned (starting from column 1).
+
+
+rc = fedFind(pattern, flags[, replace])
+
+    pattern - pattern to look for
+    flags   - find flags
+    replace - string to replace with
+
+    rc - success, negative value - error.
+
+    Supported flags:
+
+    B - Find in backward direction
+    G - Global search (from beginning to end or vice versa, depending on B flag)
+    I - Ignore case
+    E - Regexp. Pattern is regular expression
+    R - Replace found string with 'replace'
+
+    If pattern is a regular expression, then this function can substitute
+    variables in 'replace' string with parts of found string which match
+    subexpressions in pattern. Each variable begins with '$' char followed
+    by digit 0-9. Variable $0 substitutes entire matching string.
+    Variables $1-$9 substitutes 1st-9th subexpression respectively.
+    For example:
+
+    Pattern: ^(#[a-z ]+)([A-Z_0-9 ]+)(0x[0-9a-fA-F]+)(.*)
+    String : #define ONE_1       0x000   text
+    Replace: ($0)($1)($2)($3)($4)
+    Result : (#define ONE_1       0x000   text)(#define )(ONE_1       )(0x000)(   text)
+
+
+rc = fedInput([prompt[, row [, col]]])
+
+    prompt - name for the input window
+    row    - suggested row for the prompt
+    col    - suggested col for the prompt
+
+    rc - user input is returned, otherwise empty string is returned.
+
+
+rc = fedGetClip()
+
+    rc - clipboard content
+
+
+rc = fedSetClip(newtext)
+
+    newtext - text to put in clipboard
+
+
+rc = fedMenu(row, col, item1, ..., itemN)
+
+    rc - 1...N      selected meny item on return
+    rc - 0          Esc was pressed
+    rc - negative   parameter error
+
+    Displays a pop-up menu at specified location and process user
+    input until choice is made or Esc key is pressed.
+    To make text in menu item 'highlighted' bracket it with tilde (~)
+    Also, first letter of highlighted text becomes a hotkey.
+    For example:
+        " ~T~est "
+    This menu item will have letter T highlighted and will be
+    select if user will press letter T on keyboard.
+
+
+rc = fedVarSet(name[, value])
+
+    if value is provided then variable is set,
+    otherwise variable is deleted. Internal variables can't be
+    removed and some can't be set. List of internal variables
+    is provided below.
+
+
+rc = fedVarGet(name[, default])
+
+    if variable does not present in pool, then it is created
+    and default value is returned if it is specified.
+	List of internal variables variables is provided below.
+
+
+rc = fedVarDrop(name)
+
+    Drops a set of variables whose names begins with 'name'
+    Internal variables can't be dropped.
+
+
+List of internal variables
+
+   	Configuration variables
+
+		Colors
+
+        color.app.default
+        color.app.status
+        color.dialog.default
+        color.dialog.hilite
+        color.static.default
+        color.static.hilite
+        color.edit.default
+        color.edit.selection
+        color.edit.eof
+        color.edit.comment
+        color.edit.ident
+        color.edit.const
+        color.edit.preproc
+        color.edit.number
+        color.edit.stdword
+        color.edit.semicol
+        color.edit.function
+        color.edit.xnumber
+        color.edit.matching
+        color.edit.eol
+
+        color.line.active.default
+        color.line.active.selection
+        color.line.active.eof
+        color.line.active.comment
+        color.line.active.ident
+        color.line.active.const
+        color.line.active.preproc
+        color.line.active.number
+        color.line.active.stdword
+        color.line.active.semicol
+        color.line.active.function
+        color.line.active.xnumber
+        color.line.active.matching
+        color.line.active.eol
+
+        color.line.inactive.default
+        color.line.inactive.selection
+        color.line.inactive.eof
+        color.line.inactive.comment
+        color.line.inactive.ident
+        color.line.inactive.const
+        color.line.inactive.preproc
+        color.line.inactive.number
+        color.line.inactive.stdword
+        color.line.inactive.semicol
+        color.line.inactive.function
+        color.line.inactive.xnumber
+        color.line.inactive.matching
+        color.line.inactive.eol
+
+        color.list.active.default
+        color.list.active.selection
+        color.list.active.current
+        color.list.active.currsel
+
+        color.list.inactive.default
+        color.list.inactive.selection
+        color.list.inactive.current
+        color.list.inactive.currsel
+
+        color.menu.active.default
+        color.menu.active.selection
+        color.menu.active.current
+        color.menu.active.currsel
+
+   		Other setings
+
+        cursor.after.block
+        cursor.follow_tabs
+        cursor.shape.insert
+        cursor.shape.overwrite
+
+        mouse.event.mask
+        mouse.sense.shift
+        mouse.thread
+
+        editor.autounindent
+        editor.block.ins_mode
+        editor.clipboard.spaces_only
+        editor.completion.enable
+        editor.completion.minlen
+        editor.ctrlbreak.action
+        editor.default.format
+        editor.default.wordwrap.margin
+        editor.default.wordwrap.state
+        editor.draw.eol
+        editor.ea.disable
+        editor.eof
+        editor.file.name.reduce
+        editor.flash.bracket
+        editor.helptext
+        editor.indent.bracket
+        editor.indent.keywords
+        editor.indent.use_tab
+        editor.search.flags.default
+        editor.startup.directory
+        editor.statusline
+        editor.statusline.block.column
+        editor.statusline.block.string
+        editor.statusline.changed
+        editor.statusline.compl.off
+        editor.statusline.compl.on
+        editor.statusline.file.dos
+        editor.statusline.file.unix
+        editor.statusline.indent.off
+        editor.statusline.indent.on
+        editor.statusline.unchanged
+        editor.statusline.wrap.merge
+        editor.statusline.wrap.off
+        editor.statusline.wrap.on
+        editor.syntax
+        editor.syntax.save.mode
+        editor.undo.compress.moves
+        editor.unindent.brackets
+        editor.unindent.keywords
+        editor.unindent.spaces.only
+        editor.untitled
+        editor.verbose.search
+        editor.word.delete_ws
+        editor.word.delimiter
+
+		Editor key bindings variable group
+
+	    editor.keys
+
+    Current (active) window state variables
+
+        editor.current.completion
+        editor.current.autoindent
+        editor.current.column.block
+        editor.current.syntax.user
+        editor.current.ins.mode
+        editor.current.mark.state
+        editor.current.saved
+        editor.current.file.mode
+        editor.current.syntax
+        editor.current.ww.state
+        editor.current.ww.merge
+        editor.current.ww.paragraph
+        editor.current.ww.width
+        editor.current.row
+        editor.current.col
+        editor.current.start.row
+        editor.current.start.col
+        editor.current.cursor.row
+        editor.current.cursor.col
+        editor.current.marking.row
+        editor.current.marking.col
+        editor.current.undo.count
+        editor.current.memory.undo
+        editor.current.memory
+        editor.current.relative.pos.y
+        editor.current.lines
+        editor.current.window.rows
+        editor.current.window.cols
+        editor.current.codepage
+        editor.current.file.name
+
+    	editor.current.bookmark.1-9
+
+	Editor state variables
+
+        editor.box.count
+        editor.box.current
+        editor.status.position
+        editor.tab.width
+
+

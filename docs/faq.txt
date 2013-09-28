@@ -1,0 +1,38 @@
+/*
+** Module   :FAQ.TXT
+** Abstract :
+**
+** Copyright (C) Sergey I. Yevtushenko
+**
+** Log: Wed  08/08/2001 Created
+**      Fri  09/11/2001 Updated
+**      Tue  19/02/2002 Updated
+*/
+
+    Frequently Asked Questions
+
+Q: How I can change FED colors?
+A: FED colors are defined in FED.INI. Two alternative color sets are present
+   inside comments. Perhaps one of them may better fit your needs or can be
+   used as a starting point for your own set. You can see new colors right
+   after change by pressing Alt+B keystroke.
+
+Q: How to change some settings only for files with particular extension?
+A: There is kbOpen pseudo key which is invoked for each opened file.
+   FED.INI provided in FED package contains sample of such a macro
+   which toggles state of the word wrap.
+
+Q: Is FED supports autosave?
+A: FED has no built-in support for autosave. Necessary function can be
+   implemented using kbTimer pseudo key. This pseudo key is invoked every
+   second.
+
+Q: I'd like to invoke compiler from FED and then navigate through sources
+   using information about errors and warnings produced by compiler.
+   Is that possible?
+A: FED.INI provided with package contains sample macro assigned to keys
+   kbAltF8-kbAltF10 for some popular compilers. These macro are built around
+   JumpLists feature of FED. Another interesting use of the JumpList
+   is the macro assigned to kbAltV, which helps to navigate through C/C++
+   sources.
+

@@ -1,0 +1,391 @@
+/*
+** Module   :HISTORY.TXT
+** Abstract :Changes history of Fast Editor Lite
+**
+** Copyright (C) Sergey I. Yevtushenko
+** Log: Tue  24/03/1998     Created
+**
+*/
+
++ - added
+* - fixed
+- - dropped
+
+v0.2.31
+		- removed fedGet/fedSet
+		+ added editor.startup.directory variable
+		* fixed damage of memory buffer during INI reload
+		+ added external apps launcher with pipe redirection with regexp
+		  filtering (fedExec)
+		* cleaned up and updated FED.INI (get rid of fedSed/fedGet and such)
+		* some changes in config.txt (not finished)
+		* fixed macro recording
+
+v0.2.30
+		* fixed deletion of the empty line during performing word wrap
+		  with merge enabled
+		* fixed tracking of the bookmarks during line adding/removing
+		+ added some REXX APIs
+		+ added fedRxMatch (match string with regular expression and
+		  return subexpressions if necessary)
+		* fixed undo after line split in some cases
+		* fixed highlighting after backspace
+		* fixed some minor problems in FED.INI
+		* minor change in substitution algorithm (should improve
+		  autocompletion usability)
+		+ common variable pool for editor and REXX API, including key
+		  assignments
+		+ REXX common procedures
+		+ displaying REXX error messages
+		+ added restoring of initial (startup) screen
+		+ added command to show initial (startup) screen
+		- POSIX regular expressions assumed everywhere and alternative
+		code removed
+		* started imporving docs
+		* fixed backward search
+		+ updated PCRE sources included for convenience
+
+v0.2.29
+        + significant internal redesign/rewrite
+        + complete support for Tab character
+        + cursor follow tabs option
+        * minor fix in codepage detection
+        + improved smart autoindent for C/C++/PHP/Perl
+          (support for "linux coding standard" for some impatient users)
+        + added indication of the autocompletion status
+        + used PCRE regular expression library
+        + added kbActivate/kbDeactivate (works only in windowed session)
+        + added editor.block.ins_mode option (column block pasting control)
+        + added configurable EOL color
+        + added editor.undo.compress.moves option (control of the undo of
+          the sequences of the cursor movements)
+        + added .list_start variable into jump list (initial position in list)
+        + added SelectCompletion command (select completion from list)
+        + display relative position in listboxes
+        + added "last file" command for quick switching between two most
+          recently used files
+        + Ctrl-C/V/X in dialogs (copy/paste/clear respectively)
+        + Ctrl+Enter ends Search &amp; Replace dialog and starts operation
+        + improved Alt-V macro
+        * "changed" flag in the status line now shows "saved" status
+        * large number of small fixes and updates
+        * fixed opening file using full name from file dialog
+        + fixed entries in history
+        + save full file name in history
+
+v0.2.28	internal development version
+
+v0.2.27
+        + improved PHP and HTML highlighting
+        * fixed highlighting of the HTML entities (such as &nbsp;)
+
+v0.2.26
+        + added 'touch all lines' feature (removes all tabs)
+        + minor improvement in handling 'changed' flag
+        * removed redundant MouClose() (can cause hang in some
+          circumstances in FS sessions)
+        * fixed bracket matching in LaTex mode
+        * fixed restoring highlighting mode at startup
+        * fixed trap in some circumstances
+        * fixed EMX build (works with GCC 3.2.2 beta 4)
+        + autocompletion support (experimental, off by default)
+        * fixed a numer of minor bugs
+        * fixed autocompletion in PHP
+        * improved algorithm of updating autocompletion DB
+        * fixed updating autocompletion DB
+
+v0.2.25
+        * Updated automated codepage detection
+        * Fixed order of saving of history entries
+        * SearchAgain invokes Search if search string is empty
+        + configurable EOF char: cr/lf, eof (\x1A), none
+        + History for file names
+        * fixed handling of the '{' bracket
+        * fixed TeX parser (thanks to Alexander Belyaev)
+        + "unindent only whitespaces" mode (on by default)
+
+v0.2.24
+        * Changed handling of 'then' in REXX smart indent
+        * Fixed search/replace in the foreign codepage
+        * Numbering of substitution variables (start from $0 now)
+        * Fixed problem 'cyrillic r' in 1125 CP
+        + History lists for search, replace and flags
+          (saved in EA's of main INI file)
+        + EOL highlighting
+        * Fixed named pipe creation mode (allow access from REXX)
+
+v0.2.23
+        + Greatly improved line splitting speed for very long strings
+        * Fixed smart autoindent for 'switch'
+        * Changed cursor movement behavior for WordLeft/WordRight (exp)
+        * Switched to VAC++ 3.6.5 as a main compiler
+          (For some time other builds will not compile)
+        * Fixed memory leak in search routine
+        * Changed DelWordLeft/DelWordRight behavior (exp)
+        + Using Posix regexps when available
+        + JavaScript highlighting
+        + Default search flags setting
+        + Substitution of regexp subexpressions in replace string
+          (refer to fedFind description for details)
+        * Fixed description of fedFind()
+
+v0.2.22
+        * Now GNU Make is used for building FED
+        * Fixed rare hangs on exit caused by morphing
+        * Handling of the blocks now is closer to CUA
+        + @include in FED.INI is documented and improved
+        + Configurable word delimiting characters
+        + Autodetect of CP878 and CP1251 texts (experimental)
+
+v0.2.21
+        * Fixed HTML highlighting
+        * Fixed garbage in window title
+        * Improved bracket matching
+        + Added flashing for matching bracket
+        + Extended smart indent (first drop)
+        + Added new variables to control smart indent and flashing bracket:
+            editor.indent.bracket
+            editor.autounindent
+            editor.unindent.keywords
+            editor.unindent.brackets
+            editor.flash.bracket
+
+v0.2.20
+        Internal test build (a number of them, with same version)
+
+v0.2.19
+        + Added editor.input.tabwidth variable. Now FED can distinguish
+          tab width in the original source file and that one used by FED
+
+v0.2.18
+        + Added TeX highlighting module (thanks to Alexander Belyaev)
+        * Fixed incorrect handling of the mouse if status line is at top
+        * Now FED sends full file path to the master copy
+
+v0.2.17
+        + Pipe interface
+        * Fixed kbAltF8 macro
+        * Fixed redraw (window title) from threads other than main
+        * Improved handling different line delimiters (CR/LF/CRLF)
+        * Fixing traps when opening file on heavy loaded LAN or via slow link
+        * Fixed handling of '{' and '}' inside REXX macro
+        * A try to improve handling of bracket pairs matching
+
+v0.2.16
+        + Added built-in implementation of word wrapping
+        + Extended fedGet/fedSet to support new word wrap settings
+        + Added FlipWordWrap and FlipWordWrapMerge functions
+        + Added %w format character in status line
+        + Added editor.default.wordwrap.state and
+          editor.default.wordwrap.margin variables
+        * Some cleanup of FED.INI. Some macro are moved to SAMPLE.INI
+
+v0.2.15
+        * Fixed processing of trailing spaces for Del/Bksp
+        * Experimental patch in Line::ins_char()
+        + kbBeforeKey and kbAfterKey pseudo-keys
+        + fedSendKey() REXX API
+        * INI file loader rewritten. No more problems with escape
+          sequences in REXX keydefs.
+        * Changed behavior of the fedGetChar() with no parameters
+          (full string returned)
+
+v0.2.14
+        + Added processing of Shift keys with mouse. Mouse click with
+          Shift will mark block, click without Shift will unmark block.
+        + Added mouse.sense.shift variable. Default set to 1.
+
+v0.2.13
+        + Added mouse configuration variable
+        * Assigned new keys for macro in FED.INI
+
+v0.2.12
+        + Added simple mouse support (pointing of the cursor within screen)
+        * Fixed UNDO processing for replace mode
+
+v0.2.11
+        * Fixed restoring code page from EA
+        * Fixed behavior of cursor.shape.* variables
+        + Added %m parameter in status line (block marking mode)
+        * Fixed toupper/tolower processing for single characters
+        + Default FED.INI updated
+          (new help text, thanks to Dushan Mitrovich  <dushanm@abq.com>)
+        + Added fedMenu() function to REXX API
+        * Fixed processing of default color
+        * Fixed fedSet(Hxx)
+        + Included makefile's for Visual Age C++ 3.xx (retail and debug)
+
+v0.2.10
+        * Fixed infinite loop with RGN replace (if result matches pattern again)
+        * Improved (a bit) bracket matching algorithm
+        * Renamed editor.hiliting variable to editor.syntax
+        * Fixed selection by first letter of file name in file dialog
+        * In some cases C++ highlighting may be broken at the '\' boundary
+        * Fixed fedGet('CP')
+        * Fixed memory leak in search
+        + Case insensitivity in regexp search/replace
+        + Case insensitive regexp matching in editor.syntax processing
+        + PERL syntax highlighting
+        + PHP syntax highlighting (inside HTML)
+        + Smart indent support for PERL
+        + New set of file name patterns in FED.INI
+        + Significant changes in block handling to improve performance
+        + Pressing 'highlighted' letter in menu now works as select+Enter
+        + Improved REXX parser (some additions to support OOREXX)
+        + Different saving modes for syntax highlighting
+
+v0.2.9
+        + Added fedBind() REXX API
+        + Added BC and BR options for fedGet()
+        + Added on-screen file name reducing for long file names
+        + Added kbOpen and kbClose pseudokeys
+        * Bug with search spaces past the end of line
+        + Default FED.INI is updated
+        + Improved HTML highlighting
+        * Changed way of determining availability of WinXX API's
+
+v0.2.8
+        * Under some circumstances highlighting may be broken
+        * DupLine does not turns 'Changed' flag
+        + Switch for disabling of setting of EA's
+        + Switch for moving status line at the top of screen
+        + Command to reload configuration
+        + kbTimer pseudo key
+        + Highlighting is saved in EA
+        + REXX variable pool
+        + REXX API for interaction with user
+        + REXX API for clipboard handling
+        + CLIP utility included as a part of the FED distribution
+
+
+v0.2.7
+        + Editing of texts in codepage other than current one
+        + Option for displaying of relative position in file (%p)
+          and current codepage (%l)
+        + Rexx API extended with fedSet('P', 'codepage')
+          (see samples at the end of FED.INI)
+        * Preparation of REXX key definition may cause problems
+        + Current code page in stored in EA
+        * Changed format of EA in order to improve performance on
+          the FDD. Old format can be read but can't be written.
+
+v0.2.6
+        + Added 'DupLine' command and bound to Ctrl+D in default config
+
+v0.2.5
+        * Some code and tools cleanups before placing FED into open source.
+        * Changed handling of Ctrl+Break
+
+v0.2.4
+        * Choosing file name by first letter in File Dialog
+        + FED.INI is loaded from current directory too if exists
+
+v0.2.3
+        * Gray Enter != Enter in FileList
+        * Incorrect handling of TAB chracter at beginning of block
+        * Possible bug in fedOpenJumpList
+        * Potential bug in list boxes key handling (may cause hangs)
+        + Optional notification of about end of search/replace op's
+          (disabled by default, variable 'editor.verbose.search')
+        + Horisontal scrolling for JumpList
+        + Menu hotkeys
+        + Pascal syntax hiliting support (experimental)
+        + Java support (extension to C++ mode and not indicated as separate)
+        + Hiliting menu
+
+v0.2.2
+        * fixed bug with word left/word right on strings with Tab char inside
+
+V0.2.1  !NOTE!    Changed version numbering
+        * hexadecimal values in config not correctly interpreted by editor
+        * Gray Enter != Enter in JumpList
+        * trap in Line::get_print
+        * speedup for word left/word right on long lines
+
+V0.2.0v
+        * trap in REXX.DLL
+
+V0.2.0u
+        * incorrect loading of files with '\x00' inside (?)
+        * format of file can be set incorrectly
+        * trap if starting with long file name on FAT drive
+        * some improvements in documentation
+        + file name with wildcards opens File Open dialog
+        + Added calls to kbInit/kbDone pseudokeys
+        + Added fedMsgBox   REXX API call
+        + Added fedOpenFile REXX API call
+
+V0.2.0s internal beta
+        + Multiple JumpList (up to 10) support with access from REXX
+        * open files WRITEONLY when writing (allow work with ftpfs.ifs)
+
+V0.2.0r internal beta
+        + Unix/DOS file type support
+
+V0.2.0p feature extension
+        + bookmarks management (place/go) and saving them in EA
+        * some cleanups in docs
+
+V0.2.0n bugfix
+        + support for -ROW:COL in command line. passed after file name moves
+          cursor at specified ROW and COL
+        + support for storing current position in EA.
+
+V0.2.0m bugfix
+        * fixed bug in memory allocation
+        * fixed open file in new window when .Untitled exist and unchanged
+        * fixed support of session name and window title change
+          PM support now completely dynamic (was broken somewhere
+          after 0.2.0h).
+        + added MAIL hiliting
+        + updated INI file for MAIL hiliting support
+
+V0.2.0l bugfix
+        * fixed INI file parser for REXX
+        * fixed NLS support (some keys don't work)
+        + some documentation (REXX interafce not covered)
+        + added setting of filename on titlebar for windowed sessions
+        + added simplest REXX support (enabled, but not documented)
+
+V0.2.0k bugfix
+        * fixed file dialog (work with FDD)
+        * fixed heap manager
+        + added configurable cursor shape for insert/overwrite modes
+        + added simplest REXX support (disabled in this release)
+
+V0.2.0j bugfix
+        * fixed loss of autoguessing of hiliting
+        * fixed FED.INI for "#ifndef" macro
+        * fixed typo in macro recorder dialog
+        + improved file dialog
+        * fixed date format (NLS support)
+
+V0.2.0h bugfix
+        + Added keyboard macro recorder/player
+        * Implemented dynamic loading for PMWIN.DLL, so FED should run even
+          if OS/2 loaded from diskette
+
+V0.2.0g bugfix
+        * fixed bug with improper building profile name
+          if directory contains '.' in name
+
+V0.2.0f bugfix
+        + exception handler which tryes to protect opened files
+          in case of crashes
+        + some minor changes in status line format
+
+V0.2.0e bugfix
+        * improper block marking after cut/clear operations
+        * undo in block sort
+        + flexible status line
+
+V0.2.0d VERY many changes
+        + Full configuration through FED.INI
+        + Block sort
+        + Transparent PM clipboard
+        - hardcoded keyboard macroses
+
+V0.1.9q First bugfix :)
+        * fixed traps for some screen modes with lines less than 25
+V0.1.9p First public release
+

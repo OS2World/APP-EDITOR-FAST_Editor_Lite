@@ -1,0 +1,49 @@
+/*
+** Module   :CLIP.TXT
+** Abstract :Short introduction into CLIP utility
+**
+** Copyright (C) Sergey I. Yevtushenko
+**
+** Log: Sat  24/05/2003 Created
+**
+*/
+
+                        	        CLIP
+                    	Command line clipboard handler
+                            	    V0.1
+
+
+    	CLIP is an utility for accessing clipboard from command line.
+    It allows to put data from stdin to clipboard and print clipboard content
+    to the stdout. It automatically detects that STDIN (STDOUT) is pipe or
+    file and chooses appropriate mode. Each mode can be forced to allow
+    program to work with character devices (console/COMx/etc). Because modes
+    are not exclusive, it is possible to put this utility in the mid of pipe
+    and get pipe content mirrored in clipboard.
+
+    Examples:
+
+    1. Put standard output of the application to clipboard:
+
+    [C:\]dir | clip
+
+    2. Pipe clipboard content to program standard input:
+
+    [C:\]clip | more
+
+	3. Pipe between programs:
+
+    [C:\]dir | clip | more
+
+	4. Force stdin:
+
+    [C:\]clip -i
+	type> Some test string
+	^Z
+
+	5. Force stdout:
+
+    [C:\]clip -o
+	Some test string
+
+

@@ -1,0 +1,47 @@
+fedGet
+
+T   - editor.tab.width
+I   - editor.current.ins.mode
+H	- editor.current.syntax
+A 	- editor.current.autoindent
+AC  - editor.current.completion
+M   - editor.current.mark.state
+R   - editor.current.row
+?   - editor.box.count
+L	- editor.current.lines
+LC  - (last key name)
+X   - editor.current.window.cols
+Y   - editor.current.window.rows
+N	- editor.current.file.name
+D   - editor.startup.directory
+B   - editor.box.current
+BR  - editor.current.marking.row
+BC  - editor.current.marking.col
+C   - editor.current.col
+CH  - editor.current.saved
+CR  - editor.current.cursor.row
+CC  - editor.current.cursor.col
+CP  - editor.current.codepage
+WW  - editor.current.ww.width
+WS  - editor.current.ww.state
+WM  - editor.current.ww.merge
+WP  - editor.current.ww.paragraph
+
+fedSet
+
+T   - editor.tab.width
+I   - editor.current.ins.mode
+A 	- editor.current.autoindent
+AC  - editor.current.completion
+H	- editor.current.syntax
+M   - editor.current.mark.state
+R   - editor.current.row
+C   - editor.current.col
+B	- editor.box.current
+N	- editor.current.file.name
+P   - editor.current.codepage
+WW  - editor.current.ww.width
+WS  - editor.current.ww.state
+WM  - editor.current.ww.merge
+WP  - editor.current.ww.paragraph
+

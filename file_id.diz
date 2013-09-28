@@ -1,0 +1,29 @@
+Fast Editor Lite (FED) Version 0.2.31
+
+FED is VIO mode programmers editor. It's fast, small in size
+and flexible. Most notable features of FED:
+- CUA style blocks
+- Full UNDO
+- Syntax highlighting for C/C++/Java/REXX/TeX/HTML/ASM/Makefile/Pascal/Perl/Mail
+- Stream and rectangular blocks
+- Auto indent
+- Conversion to upper/lower case characters/blocks with NLS support
+- Automated russian codepage detection of source files
+- Bracket matching for ()/{}/[]/<> bracket pairs
+- Flexible key assignment
+- Transparent with PM clipboard
+- Block sort of rectangular blocks with NLS collate support
+- Keyboard macro recorder/player
+- REXX macro support
+- Saving of last cursor position and other data in Extended Attributes
+- Unix/DOS file formats supported
+- Up to 10 user accessible JumpLists supported
+- kbInit/kbDone/kbTimer pseudo keys
+- Word wraping
+- Named pipe interface
+- Optional opening of file in one instance of the editor
+- Configurable smart indent for C/C++/REXX/ASM/Pascal/Perl
+- Support for "flashing" matching bracket
+- Regular expression search with subexpression substitution
+- History for search/open files (stored in EA)
+- Autocompletion

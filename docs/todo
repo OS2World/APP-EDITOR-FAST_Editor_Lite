@@ -1,0 +1,13 @@
+-- IMPROVE DOCS
+-- integration with XRefactory
+-- permanent undo storage (?)
+-- redo
+-- automatically build help from key definitions
+-- better handling for the REXX macro (debugger/interrupt handler?)
+-- user dialogs accessible from REXX
+-- REXX get/set text/clipboard using stem variable
+-- fed[Save|Load]Var(mask)
+-- visual text compare
+-- complete user defined menu
+-- check last line in loaded file(?)
+
